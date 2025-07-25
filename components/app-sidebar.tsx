@@ -1,8 +1,19 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { Plane, BarChart3, MapPin, Settings, Users, Radio, Calendar, Database, Bell } from "lucide-react"
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import {
+  Plane,
+  BarChart3,
+  MapPin,
+  Settings,
+  Users,
+  Radio,
+  Calendar,
+  Database,
+  Bell,
+  LogOut,
+} from "lucide-react";
 
 import {
   Sidebar,
@@ -15,8 +26,17 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+} from "@/components/ui/sidebar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { useAuth } from "@/contexts/auth-context";
 
 const navigationItems = [
   {
@@ -49,7 +69,7 @@ const navigationItems = [
     url: "/alerts",
     icon: Bell,
   },
-]
+];
 
 const managementItems = [
   {
@@ -67,10 +87,19 @@ const managementItems = [
     url: "#",
     icon: Settings,
   },
-]
+];
 
 export function AppSidebar() {
-  const pathname = usePathname()
+  const pathname = usePathname();
+  const { user, logout } = useAuth();
+
+  const getInitials = (name: string) => {
+    return name
+      .split(" ")
+      .map((n) => n[0])
+      .join("")
+      .toUpperCase();
+  };
 
   return (
     <Sidebar variant="inset">
@@ -84,7 +113,9 @@ export function AppSidebar() {
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold">FlightControl</span>
-                  <span className="truncate text-xs text-muted-foreground">Admin Dashboard</span>
+                  <span className="truncate text-xs text-muted-foreground">
+                    Admin Dashboard
+                  </span>
                 </div>
               </div>
             </SidebarMenuButton>
@@ -133,21 +164,53 @@ export function AppSidebar() {
       <SidebarFooter>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton size="lg" asChild>
-              <div className="flex items-center gap-2">
-                <Avatar className="h-8 w-8 rounded-lg">
-                  <AvatarImage src="/placeholder.svg?height=32&width=32" alt="Controller" />
-                  <AvatarFallback className="rounded-lg">AC</AvatarFallback>
-                </Avatar>
-                <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">Air Controller</span>
-                  <span className="truncate text-xs text-muted-foreground">controller@atc.com</span>
-                </div>
-              </div>
-            </SidebarMenuButton>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <SidebarMenuButton
+                  size="lg"
+                  className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+                >
+                  <Avatar className="h-8 w-8 rounded-lg">
+                    <AvatarImage
+                      src={user?.avatar || "/placeholder.svg"}
+                      alt={user?.name}
+                    />
+                    <AvatarFallback className="rounded-lg">
+                      {user?.name ? getInitials(user.name) : "U"}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div className="grid flex-1 text-left text-sm leading-tight">
+                    <span className="truncate font-semibold">{user?.name}</span>
+                    <span className="truncate text-xs text-muted-foreground">
+                      {user?.email}
+                    </span>
+                  </div>
+                </SidebarMenuButton>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent
+                className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
+                side="bottom"
+                align="end"
+                sideOffset={4}
+              >
+                <DropdownMenuItem>
+                  <Settings className="mr-2 h-4 w-4" />
+                  Account Settings
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Users className="mr-2 h-4 w-4" />
+                  Profile
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={logout} className="text-red-600">
+                  <LogOut className="mr-2 h-4 w-4" />
+                  Sign Out
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarFooter>
     </Sidebar>
-  )
+  );
 }
