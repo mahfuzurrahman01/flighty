@@ -13,6 +13,7 @@ import { ToastNotifications } from "@/components/toast-notifications";
 import { AutomatedAlerts } from "@/components/automated-alerts";
 import { AirportProvider } from "@/contexts/airport-context";
 import { AirportDashboard } from "@/components/airport-dashboard";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export default function AirportsPage() {
   return (
@@ -26,6 +27,7 @@ export default function AirportsPage() {
             <div className="flex flex-1 items-center gap-2">
               <h1 className="text-lg font-semibold">Airport Management</h1>
               <div className="ml-auto flex items-center gap-2">
+                <ThemeToggle />
                 <NotificationsDropdown />
               </div>
             </div>

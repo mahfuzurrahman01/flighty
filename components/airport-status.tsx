@@ -1,6 +1,11 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Cloud, Sun, CloudRain, Wind } from "lucide-react"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Cloud, Sun, CloudRain, Wind } from "lucide-react";
+import { cn } from "@/lib/utils";
+
+interface AirportStatusProps {
+  className?: string;
+}
 
 const airports = [
   {
@@ -39,17 +44,17 @@ const airports = [
     delays: 1,
     icon: Wind,
   },
-]
+];
 
 const statusColors = {
   Normal: "bg-green-100 text-green-800",
   Delayed: "bg-yellow-100 text-yellow-800",
   Closed: "bg-red-100 text-red-800",
-}
+};
 
-export function AirportStatus() {
+export function AirportStatus({ className }: AirportStatusProps) {
   return (
-    <div className="grid gap-4 md:grid-cols-2">
+    <div className={cn("grid gap-4 md:grid-cols-2", className)}>
       {airports.map((airport) => (
         <Card key={airport.code}>
           <CardHeader className="pb-3">
@@ -58,7 +63,12 @@ export function AirportStatus() {
                 <CardTitle className="text-lg">{airport.code}</CardTitle>
                 <p className="text-sm text-muted-foreground">{airport.name}</p>
               </div>
-              <Badge variant="secondary" className={statusColors[airport.status as keyof typeof statusColors]}>
+              <Badge
+                variant="secondary"
+                className={
+                  statusColors[airport.status as keyof typeof statusColors]
+                }
+              >
                 {airport.status}
               </Badge>
             </div>
@@ -72,11 +82,13 @@ export function AirportStatus() {
               <span className="text-sm font-medium">{airport.temperature}</span>
             </div>
             <div className="mt-2 text-sm text-muted-foreground">
-              {airport.delays > 0 ? `${airport.delays} delayed flights` : "No delays"}
+              {airport.delays > 0
+                ? `${airport.delays} delayed flights`
+                : "No delays"}
             </div>
           </CardContent>
         </Card>
       ))}
     </div>
-  )
+  );
 }

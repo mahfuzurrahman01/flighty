@@ -163,8 +163,8 @@ export function FlightScheduleDashboard() {
       {/* Main Content Area */}
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         {/* Schedule View */}
-        <div className="lg:col-span-3">
-          <Card className="h-[700px]">
+        <div className="lg:col-span-3 ">
+          <Card className="h-[700px]  overflow-y-auto">
             <CardContent className="p-0 h-full">
               {viewMode === "calendar" ? (
                 <ScheduleCalendarView />

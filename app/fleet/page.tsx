@@ -13,6 +13,7 @@ import { NotificationsDropdown } from "@/components/notifications-dropdown";
 import { ToastNotifications } from "@/components/toast-notifications";
 import { FleetProvider } from "@/contexts/fleet-context";
 import { FleetDashboard } from "@/components/fleet-dashboard";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export default function FleetPage() {
   return (
@@ -29,6 +30,7 @@ export default function FleetPage() {
                   Aircraft Fleet Management
                 </h1>
                 <div className="ml-auto flex items-center gap-2">
+                  <ThemeToggle />
                   <NotificationsDropdown />
                 </div>
               </div>

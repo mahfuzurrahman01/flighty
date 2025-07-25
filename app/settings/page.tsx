@@ -7,21 +7,18 @@ import {
 } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
 import { Separator } from "@/components/ui/separator";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { NotificationsProvider } from "@/contexts/notifications-context";
-import { ATCProvider } from "@/contexts/atc-context";
+import { SettingsProvider } from "@/contexts/settings-context";
 import { NotificationsDropdown } from "@/components/notifications-dropdown";
 import { ToastNotifications } from "@/components/toast-notifications";
 import { AutomatedAlerts } from "@/components/automated-alerts";
-import { ATCCommunications } from "@/components/atc-communications";
-import { ATCRadar } from "@/components/atc-radar";
-import { ATCClearanceForms } from "@/components/atc-clearance-form";
+import { SettingsDashboard } from "@/components/settings-dashboard";
 import { ThemeToggle } from "@/components/theme-toggle";
 
-export default function ATCPage() {
+export default function SettingsPage() {
   return (
     <NotificationsProvider>
-      <ATCProvider>
+      <SettingsProvider>
         <SidebarProvider>
           <AppSidebar />
           <SidebarInset>
@@ -29,7 +26,7 @@ export default function ATCPage() {
               <SidebarTrigger className="-ml-1" />
               <Separator orientation="vertical" className="mr-2 h-4" />
               <div className="flex flex-1 items-center gap-2">
-                <h1 className="text-lg font-semibold">Air Traffic Control</h1>
+                <h1 className="text-lg font-semibold">Settings</h1>
                 <div className="ml-auto flex items-center gap-2">
                   <ThemeToggle />
                   <NotificationsDropdown />
@@ -38,33 +35,13 @@ export default function ATCPage() {
             </header>
 
             <div className="flex flex-1 flex-col gap-4 p-4">
-              <Tabs defaultValue="communications" className="w-full">
-                <TabsList className="grid w-full grid-cols-3">
-                  <TabsTrigger value="communications">
-                    Communications
-                  </TabsTrigger>
-                  <TabsTrigger value="radar">Flight Tracking</TabsTrigger>
-                  <TabsTrigger value="clearances">Issue Clearances</TabsTrigger>
-                </TabsList>
-
-                <TabsContent value="communications" className="space-y-4">
-                  <ATCCommunications />
-                </TabsContent>
-
-                <TabsContent value="radar" className="space-y-4">
-                  <ATCRadar />
-                </TabsContent>
-
-                <TabsContent value="clearances" className="space-y-4">
-                  <ATCClearanceForms />
-                </TabsContent>
-              </Tabs>
+              <SettingsDashboard />
             </div>
           </SidebarInset>
           <ToastNotifications />
           <AutomatedAlerts />
         </SidebarProvider>
-      </ATCProvider>
+      </SettingsProvider>
     </NotificationsProvider>
   );
 }

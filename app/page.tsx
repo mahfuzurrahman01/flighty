@@ -9,7 +9,7 @@ import { AppSidebar } from "@/components/app-sidebar";
 import { StatsCards } from "@/components/stats-cards";
 import { FlightTable } from "@/components/flight-table";
 import { AirportStatus } from "@/components/airport-status";
-import { FlightStatusCard } from "@/components/flight-status-card";
+
 import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -18,42 +18,8 @@ import { NotificationsProvider } from "@/contexts/notifications-context";
 import { NotificationsDropdown } from "@/components/notifications-dropdown";
 import { ToastNotifications } from "@/components/toast-notifications";
 import { AutomatedAlerts } from "@/components/automated-alerts";
-
-const recentFlights = [
-  {
-    flightNumber: "AA1234",
-    airline: "American Airlines",
-    departure: "JFK",
-    arrival: "LAX",
-    departureTime: "08:30",
-    arrivalTime: "11:45",
-    status: "On Time" as const,
-    gate: "A12",
-    aircraft: "Boeing 737",
-  },
-  {
-    flightNumber: "UA5678",
-    airline: "United Airlines",
-    departure: "ORD",
-    arrival: "SFO",
-    departureTime: "14:15",
-    arrivalTime: "16:30",
-    status: "Delayed" as const,
-    gate: "B7",
-    aircraft: "Airbus A320",
-  },
-  {
-    flightNumber: "DL9012",
-    airline: "Delta Air Lines",
-    departure: "ATL",
-    arrival: "MIA",
-    departureTime: "10:00",
-    arrivalTime: "12:15",
-    status: "Boarding" as const,
-    gate: "C3",
-    aircraft: "Boeing 757",
-  },
-];
+import { ThemeToggle } from "@/components/theme-toggle";
+import { RecentFlights } from "@/components/recent-flights";
 
 export default function Dashboard() {
   return (
@@ -84,6 +50,7 @@ export default function Dashboard() {
                   <RefreshCw className="h-4 w-4 mr-2" />
                   Refresh
                 </Button>
+                <ThemeToggle />
                 <NotificationsDropdown />
               </div>
             </div>
@@ -94,14 +61,7 @@ export default function Dashboard() {
             <StatsCards />
 
             {/* Recent Flight Updates */}
-            <div className="space-y-4">
-              <h2 className="text-xl font-semibold">Recent Flight Updates</h2>
-              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                {recentFlights.map((flight) => (
-                  <FlightStatusCard key={flight.flightNumber} {...flight} />
-                ))}
-              </div>
-            </div>
+            <RecentFlights />
 
             {/* Airport Status */}
             <div className="space-y-4">

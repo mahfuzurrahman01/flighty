@@ -13,6 +13,7 @@ import { ToastNotifications } from "@/components/toast-notifications";
 import { AutomatedAlerts } from "@/components/automated-alerts";
 import { FlightScheduleProvider } from "@/contexts/flight-schedule-context";
 import { FlightScheduleDashboard } from "@/components/flight-schedule-dashboard";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export default function SchedulePage() {
   return (
@@ -28,6 +29,7 @@ export default function SchedulePage() {
                 Flight Schedule Management
               </h1>
               <div className="ml-auto flex items-center gap-2">
+                <ThemeToggle />
                 <NotificationsDropdown />
               </div>
             </div>

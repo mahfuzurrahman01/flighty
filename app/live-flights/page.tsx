@@ -1,17 +1,22 @@
-"use client"
+"use client";
 
-import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar"
-import { AppSidebar } from "@/components/app-sidebar"
-import { Separator } from "@/components/ui/separator"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { Search, Filter, RefreshCw } from "lucide-react"
-import { NotificationsProvider } from "@/contexts/notifications-context"
-import { NotificationsDropdown } from "@/components/notifications-dropdown"
-import { ToastNotifications } from "@/components/toast-notifications"
-import { AutomatedAlerts } from "@/components/automated-alerts"
-import { LiveFlightsProvider } from "@/contexts/live-flights-context"
-import { LiveFlightsDashboard } from "@/components/live-flights-dashboard"
+import {
+  SidebarProvider,
+  SidebarInset,
+  SidebarTrigger,
+} from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/app-sidebar";
+import { Separator } from "@/components/ui/separator";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Search, Filter, RefreshCw } from "lucide-react";
+import { NotificationsProvider } from "@/contexts/notifications-context";
+import { NotificationsDropdown } from "@/components/notifications-dropdown";
+import { ToastNotifications } from "@/components/toast-notifications";
+import { AutomatedAlerts } from "@/components/automated-alerts";
+import { LiveFlightsProvider } from "@/contexts/live-flights-context";
+import { LiveFlightsDashboard } from "@/components/live-flights-dashboard";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export default function LiveFlightsPage() {
   return (
@@ -27,7 +32,10 @@ export default function LiveFlightsPage() {
               <div className="ml-auto flex items-center gap-2">
                 <div className="relative">
                   <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
-                  <Input placeholder="Search flights..." className="pl-8 w-64" />
+                  <Input
+                    placeholder="Search flights..."
+                    className="pl-8 w-64"
+                  />
                 </div>
                 <Button variant="outline" size="sm">
                   <Filter className="h-4 w-4 mr-2" />
@@ -37,6 +45,7 @@ export default function LiveFlightsPage() {
                   <RefreshCw className="h-4 w-4 mr-2" />
                   Refresh
                 </Button>
+                <ThemeToggle />
                 <NotificationsDropdown />
               </div>
             </div>
@@ -52,5 +61,5 @@ export default function LiveFlightsPage() {
         <AutomatedAlerts />
       </SidebarProvider>
     </NotificationsProvider>
-  )
+  );
 }

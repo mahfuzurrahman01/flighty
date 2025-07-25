@@ -1,17 +1,25 @@
-import { Badge } from "@/components/ui/badge"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Plane, MapPin } from "lucide-react"
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Plane, MapPin } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface FlightStatusCardProps {
-  flightNumber: string
-  airline: string
-  departure: string
-  arrival: string
-  departureTime: string
-  arrivalTime: string
-  status: "On Time" | "Delayed" | "Boarding" | "Departed" | "Arrived" | "Cancelled"
-  gate?: string
-  aircraft?: string
+  flightNumber: string;
+  airline: string;
+  departure: string;
+  arrival: string;
+  departureTime: string;
+  arrivalTime: string;
+  status:
+    | "On Time"
+    | "Delayed"
+    | "Boarding"
+    | "Departed"
+    | "Arrived"
+    | "Cancelled";
+  gate?: string;
+  aircraft?: string;
+  className?: string;
 }
 
 const statusColors = {
@@ -21,7 +29,7 @@ const statusColors = {
   Departed: "bg-purple-500",
   Arrived: "bg-gray-500",
   Cancelled: "bg-red-600",
-}
+};
 
 export function FlightStatusCard({
   flightNumber,
@@ -33,13 +41,19 @@ export function FlightStatusCard({
   status,
   gate,
   aircraft,
+  className,
 }: FlightStatusCardProps) {
   return (
-    <Card>
+    <Card className={cn(className)}>
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
-          <CardTitle className="text-lg font-semibold">{flightNumber}</CardTitle>
-          <Badge variant="secondary" className={`text-white ${statusColors[status]}`}>
+          <CardTitle className="text-lg font-semibold">
+            {flightNumber}
+          </CardTitle>
+          <Badge
+            variant="secondary"
+            className={`text-white ${statusColors[status]}`}
+          >
             {status}
           </Badge>
         </div>
@@ -79,5 +93,5 @@ export function FlightStatusCard({
         )}
       </CardContent>
     </Card>
-  )
+  );
 }

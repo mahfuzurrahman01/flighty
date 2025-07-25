@@ -1,13 +1,18 @@
-"use client"
+"use client";
 
-import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar"
-import { AppSidebar } from "@/components/app-sidebar"
-import { Separator } from "@/components/ui/separator"
-import { NotificationsProvider } from "@/contexts/notifications-context"
-import { NotificationsDropdown } from "@/components/notifications-dropdown"
-import { ToastNotifications } from "@/components/toast-notifications"
-import { AutomatedAlerts } from "@/components/automated-alerts"
-import { AlertManagement } from "@/components/alert-management"
+import {
+  SidebarProvider,
+  SidebarInset,
+  SidebarTrigger,
+} from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/app-sidebar";
+import { Separator } from "@/components/ui/separator";
+import { NotificationsProvider } from "@/contexts/notifications-context";
+
+import { ToastNotifications } from "@/components/toast-notifications";
+import { AutomatedAlerts } from "@/components/automated-alerts";
+import { AlertManagement } from "@/components/alert-management";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export default function AlertsPage() {
   return (
@@ -21,7 +26,8 @@ export default function AlertsPage() {
             <div className="flex flex-1 items-center gap-2">
               <h1 className="text-lg font-semibold">Alerts & Notifications</h1>
               <div className="ml-auto flex items-center gap-2">
-                <NotificationsDropdown />
+                <ThemeToggle />
+                {/* <NotificationsDropdown /> */}
               </div>
             </div>
           </header>
@@ -34,5 +40,5 @@ export default function AlertsPage() {
         <AutomatedAlerts />
       </SidebarProvider>
     </NotificationsProvider>
-  )
+  );
 }
